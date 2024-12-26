@@ -1,0 +1,15 @@
+{
+  "name": "webfams",
+  "version": "1.0.0",
+  "description": "A web where everyone can find anyone",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev" : "nodemon src/app.js"
+  },
+  "author": "Sparsh Bhardwaj",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
