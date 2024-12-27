@@ -3,17 +3,28 @@ const app = express();
 const PORT = 7777;
 
 
+app.get('/user', (req, res) => {
+    res.send('Data GET request');
+})
+
+app.post('/user', (req, res)=> {
+    res.send('Data POST request');
+})
+
+app.delete('/user', (req, res)=>{
+    res.send('Data Delete request');
+})
+
+app.patch('/user', (req, res)=>{
+    res.send("Data Patch request");
+})
+
+app.put('/user', (req, res)=>{
+    res.send('Data PUT request');
+})
+
 app.use('/test', (req, res) => {
     res.send('hello sparsh ');
-})
-
-app.use('/helo', (req, res) => {
-    res.send('helo helo helo');
-})
-
-
-app.use('/', (req, res) => {
-    res.send('hello world from the dashboard');
 })
 
 app.listen(PORT, () =>{
