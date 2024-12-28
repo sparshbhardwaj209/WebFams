@@ -2,23 +2,22 @@ const express = require("express");
 const app = express();
 const PORT = 7777;
 
-const {authAdmin, authUser} = require("./middlewares/auth");
-
-app.get('/user/userLogin', (req, res)=>{
-    res.send("user login successfully");
+app.get('/user/userLogin', (req, res, next)=>{
+    try{
+        console.log('Error is about to come');
+        throw new Error("I am a error");
+    }catch(err){
+        console.log(err);
+        res.status(500).send("Some error occured");
+    }
 })
 
-app.get("/user/userData", authUser, (req, res)=>{
-    res.send("User is verified successfully");
+// wildcard handler for all the routes
+app.use('/', (err, req, res, next)=>{
+    if(err){
+        res.status(500).send("Internal server error hai bhai, contact pandit ji");
+    }
 })
-
-app.get("/admin/userData", authAdmin, (req, res) => {
-  res.send("User data sent successfully");
-});
-
-app.get("/admin/deleteUser", authAdmin, (req, res) => {
-  res.send("User deleted successfully");
-});
 
 app.listen(PORT, () => {
   console.log("Server is running on port 7777");
