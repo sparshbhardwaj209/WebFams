@@ -5,14 +5,11 @@ require('dotenv').config()
 const app = express();
 const PORT = process.env.PORT || 7777;
 
+app.use(express.json());
+
 app.post("/signup", async (req, res)=>{
-    const user = new User({
-        firstName: "sparsh",
-        lastName: "pandit",
-        emailId: 'sparsh@pandit.com',
-        password: 'pandat123',
-        gender: "male"
-    });
+    // creating an instance of user model and getting the body data from the request
+    const user = new User(req.body);
     try{
         await user.save();
         res.send("User created successfully");
