@@ -4,7 +4,6 @@ const { signUpValidation } = require("../utils/validate");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
-
 // Signup API - to create a new user
 authRouter.post("/signup", async (req, res) => {
   try {
@@ -38,7 +37,7 @@ authRouter.post("/login", async (req, res) => {
 
     if (isPasswordValid) {
       const token = await user.getJWT();
-      
+
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000),
       });
@@ -49,6 +48,13 @@ authRouter.post("/login", async (req, res) => {
   } catch (err) {
     res.status(400).send("ERROR: " + err.message);
   }
+});
+
+authRouter.post("/logout", async (req, res) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+  });
+  res.send("Logged out successfully");
 });
 
 module.exports = authRouter;
